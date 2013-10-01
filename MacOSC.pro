@@ -10,16 +10,30 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = MacOSC
 TEMPLATE = app
-
+#config in macx platform
+macx{
+    ICON = icon.icns
+}
+#config in win32 platform
+win32{
+    RC_ICONS = icon.ico
+    RC_FILE = winosc.rc
+}
 
 SOURCES += main.cpp\
     Classes/oscloginwindow.cpp
 
 HEADERS  += \
-    Classes/oscloginwindow.h
+    Classes/oscloginwindow.h \
+    Common/common.h
 
 FORMS    += Classes/oscloginwindow.ui
 
 OTHER_FILES += \
     README.md \
-    icon.png
+    icon.png \
+    icon.icns \
+    Info.plist \
+    icon.ico \
+    winosc.rc \
+    LICENSE

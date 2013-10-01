@@ -8,6 +8,8 @@
 
 #include <QMainWindow>
 
+#include "Common/common.h"
+
 namespace Ui {
 class OSCLoginWindow;
 }
@@ -22,6 +24,9 @@ public:
 
 private:
     Ui::OSCLoginWindow *ui;
+    void createActions();
+private slots:
+    void aboutMacOSCAction();
 };
 
 #endif // OSCLOGINWINDOW_H
