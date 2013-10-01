@@ -21,4 +21,4 @@
 
 效果图(不断更新)：
 
-{% img /ScreenCaptures/loginwindow.png MacOSC登录界面效果图 %}
+![MacOSC登录界面效果图 ](http://github.com/OpeningO/MacOSC/raw/login/ScreenCaptures/loginwindow.png)
