@@ -25,7 +25,8 @@ SOURCES += main.cpp\
 
 HEADERS  += \
     Classes/oscloginwindow.h \
-    Common/common.h
+    Common/common.h \
+    Common/conststrings.h
 
 FORMS    += Classes/oscloginwindow.ui
 
@@ -36,4 +37,16 @@ OTHER_FILES += \
     Info.plist \
     icon.ico \
     winosc.rc \
-    LICENSE
+    LICENSE \
+    Resouces/woman.png \
+    Resouces/software@2x.png \
+    Resouces/share@2x.png \
+    Resouces/share_tencent.png \
+    Resouces/share_sina.png \
+    Resouces/man.png \
+    Resouces/Default.png \
+    Resouces/Default-568h@2x.png \
+    Resouces/aboutbg1136.jpg
+
+RESOURCES += \
+    osc.qrc

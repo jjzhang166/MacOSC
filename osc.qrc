@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/login">
+        <file>Resouces/login-win-bg.png</file>
+        <file>Resouces/login-text-bg.png</file>
+        <file>Resouces/clear-bg.png</file>
+        <file>Resouces/login-button.png</file>
+    </qresource>
+</RCC>

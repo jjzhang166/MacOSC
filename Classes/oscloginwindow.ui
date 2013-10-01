@@ -6,20 +6,255 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>380</width>
+    <height>360</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>OSCLoginWindow</string>
+  <property name="minimumSize">
+   <size>
+    <width>380</width>
+    <height>360</height>
+   </size>
   </property>
-  <widget class="QWidget" name="centralWidget"/>
+  <property name="maximumSize">
+   <size>
+    <width>380</width>
+    <height>360</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>OSC登陆</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <property name="unifiedTitleAndToolBarOnMac">
+   <bool>false</bool>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <property name="minimumSize">
+    <size>
+     <width>380</width>
+     <height>360</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>380</width>
+     <height>360</height>
+    </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <widget class="QGraphicsView" name="loginwinbg">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>380</width>
+      <height>360</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>380</width>
+      <height>360</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>380</width>
+      <height>360</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/login/Resouces/login-win-bg.png);</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="loginname">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>110</y>
+      <width>180</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>180</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>180</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="placeholderText">
+     <string>osc账号</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="password">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>141</y>
+      <width>180</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>180</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>180</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="echoMode">
+     <enum>QLineEdit::Password</enum>
+    </property>
+    <property name="placeholderText">
+     <string>osc密码</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="loginButton">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>219</y>
+      <width>180</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>180</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>180</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>登陆</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="forgetPassword">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>190</y>
+      <width>180</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>180</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>180</width>
+      <height>16777215</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>忘记密码?</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="rememberPassword">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>170</y>
+      <width>180</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>180</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>180</width>
+      <height>16777215</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>记住我的登录信息</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="registerButton">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>250</y>
+      <width>180</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>180</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>180</width>
+      <height>16777215</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>还没有账号现在注册一个?</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <zorder>loginwinbg</zorder>
+   <zorder>loginname</zorder>
+   <zorder>password</zorder>
+   <zorder>checkBox</zorder>
+   <zorder>loginButton</zorder>
+   <zorder>label</zorder>
+   <zorder>registerButton</zorder>
+   <zorder>horizontalSpacer</zorder>
+   <zorder>horizontalSpacer_6</zorder>
+   <zorder>horizontalSpacer_7</zorder>
+   <zorder>verticalSpacer_2</zorder>
+   <zorder>forgetPassword</zorder>
+   <zorder>rememberPassword</zorder>
+   <zorder>registerButton</zorder>
+  </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>400</width>
+     <width>380</width>
      <height>22</height>
     </rect>
    </property>
@@ -32,7 +267,6 @@
    </widget>
    <addaction name="menuHelp"/>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
   <action name="actionAbout">
    <property name="text">
     <string>About</string>

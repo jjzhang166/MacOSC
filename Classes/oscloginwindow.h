@@ -25,6 +25,7 @@ public:
 private:
     Ui::OSCLoginWindow *ui;
     void createActions();
+    void initLoginWindow();
 private slots:
     void aboutMacOSCAction();
 };
