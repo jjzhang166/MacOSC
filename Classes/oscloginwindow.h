@@ -24,10 +24,13 @@ public:
 
 private:
     Ui::OSCLoginWindow *ui;
+    QNetworkAccessManager *manager;
     void createActions();
     void initLoginWindow();
 private slots:
     void aboutMacOSCAction();
+    void loginMacOSCAction();
+    void onResult(QNetworkReply* reply);
 };
 
 #endif // OSCLOGINWINDOW_H

@@ -1,11 +1,7 @@
 #ifndef COMMON_H
 #define COMMON_H
 
-//Qt headers
-#include <QDebug>
-#include <QLabel>
-//custom headers
-#include "conststrings.h"
+#include "Common/headers.h"
 
 
 #endif // COMMON_H

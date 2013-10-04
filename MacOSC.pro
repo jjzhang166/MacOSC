@@ -4,7 +4,17 @@
 #
 #-------------------------------------------------
 
+###
+# fix fellow warning to add 'cache()' in pro file
+#warning: No .qmake.cache is present.
+# This significantly slows down qmake
+# with this makespec. warning: Call 'cache()'
+# in the top-level project file to rectify this problem.
+###
+cache()
 QT       += core gui
+#network setting
+QT       += network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -26,7 +36,9 @@ SOURCES += main.cpp\
 HEADERS  += \
     Classes/oscloginwindow.h \
     Common/common.h \
-    Common/conststrings.h
+    Common/conststrings.h \
+    Common/headers.h \
+    Common/urls.h
 
 FORMS    += Classes/oscloginwindow.ui
 
