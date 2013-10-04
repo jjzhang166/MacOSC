@@ -25,6 +25,7 @@ public:
 private:
     Ui::OSCLoginWindow *ui;
     QNetworkAccessManager *manager;
+   // QMovie *loadingMovie;
     void createActions();
     void initLoginWindow();
 private slots:

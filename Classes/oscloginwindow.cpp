@@ -6,22 +6,11 @@ OSCLoginWindow::OSCLoginWindow(QWidget *parent) :
     ui(new Ui::OSCLoginWindow)
 {
     ui->setupUi(this);
-    //    QLabel *l = new QLabel();
-    //    l->setMinimumSize(100,100);
-    //    l->setText("<a href=\"http://zhucongqi.cn/\">Click Here!</a>");
-    //    l->setTextFormat(Qt::RichText);
-    //    l->setTextInteractionFlags(Qt::TextBrowserInteraction);
-    //    l->setOpenExternalLinks(true);
-    //    l->show();
-
     manager = new QNetworkAccessManager(this);
-    //新建QNetworkAccessManager对象
     connect(manager,SIGNAL(finished(QNetworkReply*)),
             this,SLOT(onResult(QNetworkReply*)));
-    //发送请求
-
-
     initLoginWindow();
+
     createActions();
 }
 
@@ -59,6 +48,9 @@ void OSCLoginWindow::initLoginWindow()
     ui->forgetPassword->setTextFormat(Qt::RichText);
     ui->forgetPassword->setTextInteractionFlags(Qt::TextBrowserInteraction);
     ui->forgetPassword->setOpenExternalLinks(true);
+    //init prompt
+    ui->prompt->setText(CLEAR_TEXT);
+    ui->prompt->setTextFormat(Qt::RichText);
 }
 
 void OSCLoginWindow::aboutMacOSCAction()
@@ -68,6 +60,7 @@ void OSCLoginWindow::aboutMacOSCAction()
 
 void OSCLoginWindow::loginMacOSCAction()
 {
+    ui->prompt->setText(RICH_TEXT("green","1233"));
     if (ui->loginname->text().length() == 0
             || ui->password->text().length() ==0){
         return;
@@ -76,6 +69,14 @@ void OSCLoginWindow::loginMacOSCAction()
     request.setHeader(QNetworkRequest::ContentTypeHeader,"application/x-www-form-urlencoded");
     QString params = QString("username=").append(ui->loginname->text()).append("&pwd=").append(ui->password->text());
     manager->post(request,QByteArray(params.toStdString().c_str()));
+    ui->loginname->setEnabled(false);
+    ui->password->setEnabled(false);
+    ui->rememberPassword->setEnabled(false);
+    ui->loginButton->setEnabled(false);
+
+    QMovie *loadingMovie = new QMovie(":/login/loading");
+    ui->prompt->setMovie(loadingMovie);
+     loadingMovie->start();
 
     qDebug() << "login action";
 }

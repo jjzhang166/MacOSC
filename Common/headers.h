@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QLabel>
 //network
+#include <QMovie>
 #include <QUrl>
 #include <QUrlQuery>
 #include <QtNetwork/QNetworkRequest>

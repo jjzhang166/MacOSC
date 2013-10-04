@@ -234,20 +234,34 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <zorder>loginwinbg</zorder>
-   <zorder>loginname</zorder>
-   <zorder>password</zorder>
-   <zorder>checkBox</zorder>
-   <zorder>loginButton</zorder>
-   <zorder>label</zorder>
-   <zorder>registerButton</zorder>
-   <zorder>horizontalSpacer</zorder>
-   <zorder>horizontalSpacer_6</zorder>
-   <zorder>horizontalSpacer_7</zorder>
-   <zorder>verticalSpacer_2</zorder>
-   <zorder>forgetPassword</zorder>
-   <zorder>rememberPassword</zorder>
-   <zorder>registerButton</zorder>
+   <widget class="QLabel" name="prompt">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>280</y>
+      <width>180</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>180</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>180</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>&lt;span style=&quot; color:#ed4e13;&quot;&gt;TextLabel&lt;/span&gt;</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
