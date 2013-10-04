@@ -6,9 +6,7 @@ OSCLoginWindow::OSCLoginWindow(QWidget *parent) :
     ui(new Ui::OSCLoginWindow)
 {
     ui->setupUi(this);
-    manager = new QNetworkAccessManager(this);
-    connect(manager,SIGNAL(finished(QNetworkReply*)),
-            this,SLOT(onResult(QNetworkReply*)));
+
     initLoginWindow();
 
     createActions();
@@ -24,6 +22,7 @@ void OSCLoginWindow::onResult(QNetworkReply* reply)
 OSCLoginWindow::~OSCLoginWindow()
 {
     delete ui;
+    delete manager;
 }
 
 void OSCLoginWindow::createActions()
@@ -34,6 +33,9 @@ void OSCLoginWindow::createActions()
     //login button action
     connect(ui->loginButton,SIGNAL(clicked()),
             this,SLOT(loginMacOSCAction()));
+    //network signal and slot
+    connect(manager,SIGNAL(finished(QNetworkReply*)),
+            this,SLOT(onResult(QNetworkReply*)));
 }
 
 void OSCLoginWindow::initLoginWindow()
@@ -51,6 +53,8 @@ void OSCLoginWindow::initLoginWindow()
     //init prompt
     ui->prompt->setText(CLEAR_TEXT);
     ui->prompt->setTextFormat(Qt::RichText);
+    //init network manager
+    manager = new QNetworkAccessManager(this);
 }
 
 void OSCLoginWindow::aboutMacOSCAction()
