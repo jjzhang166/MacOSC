@@ -23,10 +23,22 @@
  ** CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *****************************************************************************************/
 
-#ifndef COMMON_H
-#define COMMON_H
+#ifndef XMLPARSERUTIL_H
+#define XMLPARSERUTIL_H
 
-#include "Common/headers.h"
+#include "Common/common.h"
 
+class XmlParserUtil
+{
+public:
+    static XmlParserUtil * getXmlParserUtil(const QString& data);
+    XmlParserUtil(const QString& data);
+    QString getErrorMessage();
+    bool isErrored();
+private:
+    quint32 getErrorCode();
+    QString * value(QString *node);
+    QDomDocument *domDoc;
+};
 
-#endif // COMMON_H
+#endif // XMLPARSERUTIL_H

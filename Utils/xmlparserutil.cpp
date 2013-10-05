@@ -23,10 +23,54 @@
  ** CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *****************************************************************************************/
 
-#ifndef COMMON_H
-#define COMMON_H
+#include "xmlparserutil.h"
 
-#include "Common/headers.h"
+/*
+ * private area
+ * private functions
+*/
+XmlParserUtil::XmlParserUtil(const QString& data)
+{
+    domDoc  = new QDomDocument();
+    domDoc->setContent(data);
+}
 
 
-#endif // COMMON_H
+quint32 XmlParserUtil::getErrorCode()
+{
+    return domDoc->elementsByTagName(ERROR_CODE_NODE).at(0).toElement().text().toInt();
+}
+
+QString *XmlParserUtil::value(QString *node)
+{
+    return node;
+}
+
+
+/*
+ * public area
+ * Common instance handle
+*/
+XmlParserUtil * XmlParserUtil::getXmlParserUtil(const QString& data)
+{
+    return (new XmlParserUtil(data));
+}
+
+/**
+ *public functions
+ */
+
+
+bool XmlParserUtil::isErrored()
+{
+    if (getErrorCode() != ERROR_CODE_SUCCESS) {
+        qDebug() << getErrorCode();
+       return true;
+    }
+    return false;
+}
+
+QString XmlParserUtil::getErrorMessage()
+{
+    return domDoc->elementsByTagName(ERROR_MESSAGE_NODE).at(0).toElement().text();
+}

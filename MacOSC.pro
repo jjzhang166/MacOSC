@@ -15,6 +15,8 @@ cache()
 QT       += core gui
 #network setting
 QT       += network
+# xml
+QT       += xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -31,14 +33,17 @@ win32{
 }
 # MacOSC Sources
 SOURCES += main.cpp\
-    Classes/oscloginwindow.cpp
+    Classes/oscloginwindow.cpp \
+    Utils/xmlparserutil.cpp
 # MacOSC Headers
 HEADERS  += \
     Classes/oscloginwindow.h \
     Common/common.h \
     Common/conststrings.h \
     Common/headers.h \
-    Common/urls.h
+    Common/urls.h \
+    Utils/xmlparserutil.h \
+    Common/xmlnodenames.h
 # Forms
 FORMS    += Classes/oscloginwindow.ui
 # images and config files

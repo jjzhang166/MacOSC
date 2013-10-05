@@ -23,10 +23,11 @@
  ** CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *****************************************************************************************/
 
-#ifndef COMMON_H
-#define COMMON_H
+#ifndef XMLNODENAMES_H
+#define XMLNODENAMES_H
 
-#include "Common/headers.h"
+#define ERROR_CODE_SUCCESS          1
+#define ERROR_CODE_NODE             "errorCode"
+#define ERROR_MESSAGE_NODE          "errorMessage"
 
-
-#endif // COMMON_H
+#endif // XMLNODENAMES_H
