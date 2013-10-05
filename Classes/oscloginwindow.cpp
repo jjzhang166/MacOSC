@@ -6,19 +6,13 @@ OSCLoginWindow::OSCLoginWindow(QWidget *parent) :
     ui(new Ui::OSCLoginWindow)
 {
     ui->setupUi(this);
-
+//  init login window
     initLoginWindow();
-
+// connect signals and slots
     createActions();
 }
 
-
-void OSCLoginWindow::onResult(QNetworkReply* reply)
-{
-    QString data = (QString) reply->readAll();
-    qDebug() << data;
-}
-
+// mem clear
 OSCLoginWindow::~OSCLoginWindow()
 {
     delete ui;
@@ -29,13 +23,13 @@ void OSCLoginWindow::createActions()
 {
     //about item action
     connect(ui->actionAbout,SIGNAL(triggered()),
-            this,SLOT(aboutMacOSCAction()));
+            this,SLOT(onAboutMacOSCAction()));
     //login button action
     connect(ui->loginButton,SIGNAL(clicked()),
-            this,SLOT(loginMacOSCAction()));
+            this,SLOT(onLoginMacOSCAction()));
     //network signal and slot
     connect(manager,SIGNAL(finished(QNetworkReply*)),
-            this,SLOT(onResult(QNetworkReply*)));
+            this,SLOT(onLoginRequestResult(QNetworkReply*)));
 }
 
 void OSCLoginWindow::initLoginWindow()
@@ -57,30 +51,42 @@ void OSCLoginWindow::initLoginWindow()
     manager = new QNetworkAccessManager(this);
 }
 
-void OSCLoginWindow::aboutMacOSCAction()
+void OSCLoginWindow::changeState(bool state)
+{
+    ui->loginname->setEnabled(state);
+    ui->password->setEnabled(state);
+    ui->rememberPassword->setEnabled(state);
+    ui->loginButton->setEnabled(state);
+}
+
+void OSCLoginWindow::onAboutMacOSCAction()
 {
     qDebug() << "about";
 }
 
-void OSCLoginWindow::loginMacOSCAction()
+void OSCLoginWindow::onLoginMacOSCAction()
 {
-    ui->prompt->setText(RICH_TEXT("green","1233"));
     if (ui->loginname->text().length() == 0
             || ui->password->text().length() ==0){
+        ui->prompt->setText(RICH_TEXT(RED_COLOR,EMPTY_TEXT));
         return;
     }
-    QNetworkRequest request(QUrl(OSC_LOGIN_URL));
+    QNetworkRequest request(OSC_HTTPS_LOGIN_URL);
     request.setHeader(QNetworkRequest::ContentTypeHeader,"application/x-www-form-urlencoded");
-    QString params = QString("username=").append(ui->loginname->text()).append("&pwd=").append(ui->password->text());
-    manager->post(request,QByteArray(params.toStdString().c_str()));
-    ui->loginname->setEnabled(false);
-    ui->password->setEnabled(false);
-    ui->rememberPassword->setEnabled(false);
-    ui->loginButton->setEnabled(false);
+    QString params = QString("username=")
+                        .append(ui->loginname->text())
+                        .append("&pwd=")
+                        .append(ui->password->text());
+    manager->post(request,QByteArray(CONVERT_TO_C_CHAR(params)));
+    changeState(false);
+}
 
+void OSCLoginWindow::onLoginRequestResult(QNetworkReply* reply)
+{
     QMovie *loadingMovie = new QMovie(":/login/loading");
     ui->prompt->setMovie(loadingMovie);
-     loadingMovie->start();
-
-    qDebug() << "login action";
+    loadingMovie->start();
+    QString data = (QString) reply->readAll();
+    qDebug() << data;
+    changeState();
 }

@@ -11,7 +11,6 @@
 #include <QtNetwork/QNetworkRequest>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
-//json
 //custom headers
 #include "conststrings.h"
 #include "Common/urls.h"

@@ -27,10 +27,11 @@ private:
     QNetworkAccessManager *manager;
     void createActions();
     void initLoginWindow();
+    void changeState(bool state=true);
 private slots:
-    void aboutMacOSCAction();
-    void loginMacOSCAction();
-    void onResult(QNetworkReply* reply);
+    void onAboutMacOSCAction();
+    void onLoginMacOSCAction();
+    void onLoginRequestResult(QNetworkReply* reply);
 };
 
 #endif // OSCLOGINWINDOW_H

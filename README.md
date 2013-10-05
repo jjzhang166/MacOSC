@@ -6,7 +6,7 @@
 项目说明:
    1. 为了客户端的可跨平台,使用Qt5.1.1开发,这样就可以在各个平台
     编译发布在使用.
-   2. 项目源码使用Git@OSC,github,会这两个平台同步更新.
+   2. 项目源码使用Git@OSC,github,会在这两个平台同步更新.
    
  	```
    MacOSC@OSC: git@git.oschina.net:brucezcq/MacOSC.git
