@@ -34,7 +34,8 @@ win32{
 # MacOSC Sources
 SOURCES += main.cpp\
     Classes/oscloginwindow.cpp \
-    Utils/xmlparserutil.cpp
+    Utils/xmlparserutil.cpp \
+    Models/oscuser.cpp
 # MacOSC Headers
 HEADERS  += \
     Classes/oscloginwindow.h \
@@ -43,7 +44,8 @@ HEADERS  += \
     Common/headers.h \
     Common/urls.h \
     Utils/xmlparserutil.h \
-    Common/xmlnodenames.h
+    Common/xmlnodenames.h \
+    Models/oscuser.h
 # Forms
 FORMS    += Classes/oscloginwindow.ui
 # images and config files

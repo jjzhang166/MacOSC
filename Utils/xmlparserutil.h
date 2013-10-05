@@ -28,16 +28,22 @@
 
 #include "Common/common.h"
 
+class OSCUser;
+
 class XmlParserUtil
 {
 public:
     static XmlParserUtil * getXmlParserUtil(const QString& data);
     XmlParserUtil(const QString& data);
-    QString getErrorMessage();
     bool isErrored();
+    QString getErrorMessage();
+    OSCUser* getOSCUser();
+    virtual ~XmlParserUtil();
 private:
     quint32 getErrorCode();
-    QString * value(QString *node);
+    QString value(const QString &node);
+    void updateData(const QString& data);
+    static XmlParserUtil *xml;
     QDomDocument *domDoc;
 };
 

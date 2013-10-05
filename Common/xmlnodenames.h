@@ -26,8 +26,17 @@
 #ifndef XMLNODENAMES_H
 #define XMLNODENAMES_H
 
+//error nodes
 #define ERROR_CODE_SUCCESS          1
 #define ERROR_CODE_NODE             "errorCode"
 #define ERROR_MESSAGE_NODE          "errorMessage"
+//user nodes
+#define USER_UID_NODE               "uid"
+#define USER_LOCATION_NODE          "location"
+#define USER_NAME_NODE              "name"
+#define USER_FOLLOWERS_NODE         "followers"
+#define USER_FANS_NODE              "fans"
+#define USER_SCORE_NODE             "score"
+#define USER_PORTRAIT_NODE          "portrait"
 
 #endif // XMLNODENAMES_H

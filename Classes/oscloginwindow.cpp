@@ -74,6 +74,9 @@ void OSCLoginWindow::initLoginWindow()
     ui->prompt->setTextFormat(Qt::RichText);
     //init network manager
     manager = new QNetworkAccessManager(this);
+
+    //testing data
+    ui->loginname->setText("brucezcq@gmail.com");
 }
 
 void OSCLoginWindow::changeState(bool state)
@@ -108,16 +111,38 @@ void OSCLoginWindow::onLoginMacOSCAction()
 
 void OSCLoginWindow::onLoginRequestResult(QNetworkReply* reply)
 {
-    QString data = (QString) reply->readAll();
-    //parse xml
-    XmlParserUtil *xml = XmlParserUtil::getXmlParserUtil(data);
-    if (xml->isErrored()) {
-        ui->prompt->setText(RICH_TEXT(RED_COLOR,CONVERT_TO_C_CHAR(xml->getErrorMessage())));
-        //reopen
-        changeState();
+    if (reply->error() != QNetworkReply::NoError) {
+        ui->prompt->setText(RICH_TEXT(RED_COLOR,"貌似红薯又爆菊了"));
         return;
     }
-    QMovie *loadingMovie = new QMovie(":/login/loading");
-    ui->prompt->setMovie(loadingMovie);
-    loadingMovie->start();
+
+    QString data = (QString) reply->readAll();
+    if (OSC_HTTPS_LOGIN_URL == reply->url()) {
+        //parse xml
+        XmlParserUtil *xml = XmlParserUtil::getXmlParserUtil(data);
+        if (xml->isErrored()) {
+            ui->prompt->setText(RICH_TEXT(RED_COLOR,CONVERT_TO_C_CHAR(xml->getErrorMessage())));
+            //reopen
+            changeState();
+            return;
+        }
+        QMovie *loadingMovie = new QMovie(":/login/loading");
+        ui->prompt->setMovie(loadingMovie);
+        loadingMovie->start();
+       OSCUser* user = xml->getOSCUser();
+       manager->get(QNetworkRequest(QUrl("http://farm5.static.flickr.com/4101/4798839454_725882374d_b.jpg")));
+    }else{
+        qDebug() << "get avatar";
+        QPixmap currentPicture;
+        currentPicture.loadFromData(reply->readAll());
+//        QDateTime now;
+//        QString filename = now.currentDateTime().toString("yyMMddhhmmss.jpg");
+//        currentPicture->save(QString("/Users/BruceZCQ/Downloads/").append(filename));
+        QLabel *ImageLabel = new QLabel();
+//        QMovie *move = new QMovie(filename);
+//        ImageLabel->setMovie(move);
+//        move->start();
+        ImageLabel->setPixmap(currentPicture);
+        ImageLabel->show();
+    }
 }

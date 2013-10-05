@@ -23,32 +23,50 @@
  ** CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *****************************************************************************************/
 
-#ifndef HEADERS_H
-#define HEADERS_H
+#include "oscuser.h"
 
-//c or std headers
-#include <stdio.h>
-//Qt headers
-//#include <QDebug>
-//#include <QLabel>
-//#include <QMessageBox>
-#include <QtCore>
-#include <QtGui>
-#include <QtXml>
-//network
-#include <QMovie>
-#include <QPushButton>
-#include <QUrl>
-#include <QUrlQuery>
-#include <QtNetwork/QNetworkRequest>
-#include <QtNetwork/QNetworkAccessManager>
-#include <QtNetwork/QNetworkReply>
-//custom headers
-#include "Common/urls.h"
-#include "conststrings.h"
-#include "Common/xmlnodenames.h"
-//models
-#include "Models/oscuser.h"
-#include "Utils/xmlparserutil.h"
+OSCUser::OSCUser(QHash<QString,QString> hash)
+{
+    uid = hash.value(USER_UID_NODE).toInt();
+    location = hash.value(USER_LOCATION_NODE);
+    name = hash.value(USER_NAME_NODE);
+    followers = hash.value(USER_FOLLOWERS_NODE).toInt();
+    fans = hash.value(USER_FANS_NODE).toInt();
+    score = hash.value(USER_SCORE_NODE).toInt();
+    portrait = hash.value(USER_PORTRAIT_NODE);
+}
 
-#endif // HEADERS_H
+quint32 OSCUser::getUid()
+{
+    return uid;
+}
+
+QString OSCUser::getLocation()
+{
+    return location;
+}
+
+QString OSCUser::getName()
+{
+    return name;
+}
+
+quint32 OSCUser::getFollowers()
+{
+    return followers;
+}
+
+quint32 OSCUser::getFans()
+{
+    return fans;
+}
+
+quint32 OSCUser::getScore()
+{
+    return score;
+}
+
+QString OSCUser::getPortrait()
+{
+    return portrait;
+}

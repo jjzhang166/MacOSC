@@ -23,32 +23,31 @@
  ** CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *****************************************************************************************/
 
-#ifndef HEADERS_H
-#define HEADERS_H
+#ifndef OSCUSER_H
+#define OSCUSER_H
 
-//c or std headers
-#include <stdio.h>
-//Qt headers
-//#include <QDebug>
-//#include <QLabel>
-//#include <QMessageBox>
-#include <QtCore>
-#include <QtGui>
-#include <QtXml>
-//network
-#include <QMovie>
-#include <QPushButton>
-#include <QUrl>
-#include <QUrlQuery>
-#include <QtNetwork/QNetworkRequest>
-#include <QtNetwork/QNetworkAccessManager>
-#include <QtNetwork/QNetworkReply>
-//custom headers
-#include "Common/urls.h"
-#include "conststrings.h"
-#include "Common/xmlnodenames.h"
-//models
-#include "Models/oscuser.h"
-#include "Utils/xmlparserutil.h"
+#include "Common/common.h"
 
-#endif // HEADERS_H
+class OSCUser
+{
+public:
+    OSCUser(QHash<QString,QString> hash);
+    quint32 getUid();
+    QString getLocation();
+    QString getName();
+    quint32 getFollowers();
+    quint32 getFans();
+    quint32 getScore();
+    QString getPortrait();
+
+private:
+    quint32 uid;                //user id
+    QString location;          // user location
+    QString name;              // user name
+    quint32 followers;          // user follower count
+    quint32 fans;               // user fan count
+    quint32 score;              // user score
+    QString portrait;          // user avatar url
+};
+
+#endif // OSCUSER_H

@@ -25,6 +25,7 @@
 
 #include "xmlparserutil.h"
 
+XmlParserUtil * XmlParserUtil::xml = NULL;
 /*
  * private area
  * private functions
@@ -41,9 +42,14 @@ quint32 XmlParserUtil::getErrorCode()
     return domDoc->elementsByTagName(ERROR_CODE_NODE).at(0).toElement().text().toInt();
 }
 
-QString *XmlParserUtil::value(QString *node)
+QString XmlParserUtil::value(const QString& node)
 {
-    return node;
+    return domDoc->elementsByTagName(node).at(0).toElement().text();
+}
+
+void XmlParserUtil::updateData(const QString &data)
+{
+    domDoc->setContent(data);
 }
 
 
@@ -53,14 +59,17 @@ QString *XmlParserUtil::value(QString *node)
 */
 XmlParserUtil * XmlParserUtil::getXmlParserUtil(const QString& data)
 {
-    return (new XmlParserUtil(data));
+    if (xml == NULL) {
+        xml = new XmlParserUtil(data);
+    }else{
+        xml->updateData(data);
+    }
+    return xml;
 }
 
 /**
  *public functions
  */
-
-
 bool XmlParserUtil::isErrored()
 {
     if (getErrorCode() != ERROR_CODE_SUCCESS) {
@@ -70,7 +79,33 @@ bool XmlParserUtil::isErrored()
     return false;
 }
 
+XmlParserUtil::~XmlParserUtil()
+{
+    delete xml;
+}
+
 QString XmlParserUtil::getErrorMessage()
 {
     return domDoc->elementsByTagName(ERROR_MESSAGE_NODE).at(0).toElement().text();
+}
+
+OSCUser* XmlParserUtil::getOSCUser()
+{
+    //OSCUser
+    QString uid = value(USER_UID_NODE);
+    QString location = value(USER_LOCATION_NODE);
+    QString name = value(USER_NAME_NODE);
+    QString followers = value(USER_FOLLOWERS_NODE);
+    QString fans = value(USER_FANS_NODE);
+    QString score = value(USER_SCORE_NODE);
+    QString portrait = value(USER_PORTRAIT_NODE);
+    QHash<QString,QString> hash;
+    hash.insert(USER_UID_NODE,uid);
+    hash.insert(USER_LOCATION_NODE,location);
+    hash.insert(USER_NAME_NODE,name);
+    hash.insert(USER_FOLLOWERS_NODE,followers);
+    hash.insert(USER_FANS_NODE,fans);
+    hash.insert(USER_SCORE_NODE,score);
+    hash.insert(USER_PORTRAIT_NODE,portrait);
+    return (new OSCUser(hash));
 }
