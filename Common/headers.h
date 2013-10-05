@@ -40,6 +40,9 @@
 #include <QPushButton>
 #include <QUrl>
 #include <QUrlQuery>
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
 #include <QtNetwork/QNetworkRequest>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
@@ -47,8 +50,13 @@
 #include "Common/urls.h"
 #include "conststrings.h"
 #include "Common/xmlnodenames.h"
+#include "Common/dbconfig.h"
 //models
 #include "Models/oscuser.h"
 #include "Utils/xmlparserutil.h"
+#include "Utils/oscdbutil.h"
+// windows
+#include "Classes/oscloginwindow.h"
+#include "Classes/oscmainwindow.h"
 
 #endif // HEADERS_H

@@ -42,6 +42,8 @@ OSCLoginWindow::~OSCLoginWindow()
 {
     delete ui;
     delete manager;
+    delete xml;
+    delete db;
 }
 
 void OSCLoginWindow::createActions()
@@ -59,6 +61,10 @@ void OSCLoginWindow::createActions()
 
 void OSCLoginWindow::initLoginWindow()
 {
+    //init tools
+    xml = XmlParserUtil::getXmlParserUtil();
+    db = OSCDbUtil::getDbHelper();
+
     //init register button
     ui->registerButton->setText(REGISTER_TEXT);
     ui->registerButton->setTextFormat(Qt::RichText);
@@ -119,7 +125,7 @@ void OSCLoginWindow::onLoginRequestResult(QNetworkReply* reply)
     QString data = (QString) reply->readAll();
     if (OSC_HTTPS_LOGIN_URL == reply->url()) {
         //parse xml
-        XmlParserUtil *xml = XmlParserUtil::getXmlParserUtil(data);
+        xml->setData(data);
         if (xml->isErrored()) {
             ui->prompt->setText(RICH_TEXT(RED_COLOR,CONVERT_TO_C_CHAR(xml->getErrorMessage())));
             //reopen

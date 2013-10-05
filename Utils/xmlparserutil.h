@@ -33,16 +33,15 @@ class OSCUser;
 class XmlParserUtil
 {
 public:
-    static XmlParserUtil * getXmlParserUtil(const QString& data);
-    XmlParserUtil(const QString& data);
+    static XmlParserUtil * getXmlParserUtil();
+    XmlParserUtil();
     bool isErrored();
+    void setData(const QString& data);
     QString getErrorMessage();
     OSCUser* getOSCUser();
-    virtual ~XmlParserUtil();
 private:
     quint32 getErrorCode();
     QString value(const QString &node);
-    void updateData(const QString& data);
     static XmlParserUtil *xml;
     QDomDocument *domDoc;
 };

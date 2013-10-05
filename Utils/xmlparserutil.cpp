@@ -30,10 +30,9 @@ XmlParserUtil * XmlParserUtil::xml = NULL;
  * private area
  * private functions
 */
-XmlParserUtil::XmlParserUtil(const QString& data)
+XmlParserUtil::XmlParserUtil()
 {
     domDoc  = new QDomDocument();
-    domDoc->setContent(data);
 }
 
 
@@ -47,22 +46,14 @@ QString XmlParserUtil::value(const QString& node)
     return domDoc->elementsByTagName(node).at(0).toElement().text();
 }
 
-void XmlParserUtil::updateData(const QString &data)
-{
-    domDoc->setContent(data);
-}
-
-
 /*
  * public area
  * Common instance handle
 */
-XmlParserUtil * XmlParserUtil::getXmlParserUtil(const QString& data)
+XmlParserUtil * XmlParserUtil::getXmlParserUtil()
 {
     if (xml == NULL) {
-        xml = new XmlParserUtil(data);
-    }else{
-        xml->updateData(data);
+        xml = new XmlParserUtil();
     }
     return xml;
 }
@@ -79,9 +70,9 @@ bool XmlParserUtil::isErrored()
     return false;
 }
 
-XmlParserUtil::~XmlParserUtil()
+void XmlParserUtil::setData(const QString &data)
 {
-    delete xml;
+    domDoc->setContent(data);
 }
 
 QString XmlParserUtil::getErrorMessage()
@@ -91,7 +82,7 @@ QString XmlParserUtil::getErrorMessage()
 
 OSCUser* XmlParserUtil::getOSCUser()
 {
-    //OSCUser
+    //parse user data
     QString uid = value(USER_UID_NODE);
     QString location = value(USER_LOCATION_NODE);
     QString name = value(USER_NAME_NODE);
@@ -99,6 +90,7 @@ OSCUser* XmlParserUtil::getOSCUser()
     QString fans = value(USER_FANS_NODE);
     QString score = value(USER_SCORE_NODE);
     QString portrait = value(USER_PORTRAIT_NODE);
+    //create user hash, reflect keys to values
     QHash<QString,QString> hash;
     hash.insert(USER_UID_NODE,uid);
     hash.insert(USER_LOCATION_NODE,location);
@@ -107,5 +99,6 @@ OSCUser* XmlParserUtil::getOSCUser()
     hash.insert(USER_FANS_NODE,fans);
     hash.insert(USER_SCORE_NODE,score);
     hash.insert(USER_PORTRAIT_NODE,portrait);
+    //create a osc user with hash
     return (new OSCUser(hash));
 }

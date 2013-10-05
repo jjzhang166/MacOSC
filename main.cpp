@@ -25,10 +25,15 @@
 
 #include "Classes/oscloginwindow.h"
 #include <QApplication>
+#include <QTextCodec>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    //setting codec
+    QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
+    //QApplication::setQuitOnLastWindowClosed(false);
+
     OSCLoginWindow w;
     w.show();
 

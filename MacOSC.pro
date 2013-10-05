@@ -17,6 +17,8 @@ QT       += core gui
 QT       += network
 # xml
 QT       += xml
+# sql
+QT       += sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -35,7 +37,9 @@ win32{
 SOURCES += main.cpp\
     Classes/oscloginwindow.cpp \
     Utils/xmlparserutil.cpp \
-    Models/oscuser.cpp
+    Models/oscuser.cpp \
+    Utils/oscdbutil.cpp \
+    Classes/oscmainwindow.cpp
 # MacOSC Headers
 HEADERS  += \
     Classes/oscloginwindow.h \
@@ -45,9 +49,13 @@ HEADERS  += \
     Common/urls.h \
     Utils/xmlparserutil.h \
     Common/xmlnodenames.h \
-    Models/oscuser.h
+    Models/oscuser.h \
+    Utils/oscdbutil.h \
+    Common/dbconfig.h \
+    Classes/oscmainwindow.h
 # Forms
-FORMS    += Classes/oscloginwindow.ui
+FORMS    += Classes/oscloginwindow.ui \
+    Classes/oscmainwindow.ui
 # images and config files
 OTHER_FILES += \
     README.md \

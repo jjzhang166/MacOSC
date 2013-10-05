@@ -39,6 +39,9 @@ namespace Ui {
 class OSCLoginWindow;
 }
 
+class XmlParserUtil;
+class OSCDbUtil;
+
 class OSCLoginWindow : public QMainWindow
 {
     Q_OBJECT
@@ -50,6 +53,8 @@ public:
 private:
     Ui::OSCLoginWindow *ui;
     QNetworkAccessManager *manager;
+    XmlParserUtil *xml;
+    OSCDbUtil *db;
     void createActions();
     void initLoginWindow();
     void changeState(bool state=true);

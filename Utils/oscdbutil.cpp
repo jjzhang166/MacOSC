@@ -23,28 +23,44 @@
  ** CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *****************************************************************************************/
 
+#include "oscdbutil.h"
 
-#ifndef CONSTSTRINGS_H
-#define CONSTSTRINGS_H
+OSCDbUtil* OSCDbUtil::dbHelper = NULL;
 
-//common convert
-#define CONVERT_TO_C_CHAR(text) \
-    QString(text).toStdString().c_str()
-//texts
-#define REGISTER_TEXT \
-    tr("<a href=\"https://www.oschina.net/home/reg/\">还没有账号现在注册一个?</a>")
-#define FORGETPASSWORD_TEXT \
-    tr("<a href=\"http://www.oschina.net/home/reset-pwd/\">忘记登录密码?</a>")
-#define CLEAR_TEXT tr("")
-#define RICH_TEXT(color,text) \
-    QString(tr("<font color='")).append(tr(color)).append("'>").append(tr(text)).append(tr("</font>"))
-#define EMPTY_TEXT      CONVERT_TO_C_CHAR(tr("用户名或密码不能为空"))
-#define INVALID_TEXT    CONVERT_TO_C_CHAR(tr("用户名或密码错误"))
-//colors
-#define RED_COLOR          CONVERT_TO_C_CHAR(tr("red"))   //red
-#define GREEN_COLOR        CONVERT_TO_C_CHAR(tr("green")) //green
-#define BLUE_COLOR         CONVERT_TO_C_CHAR(tr("blue"))  //blue
-#define GRAY_COLOR         CONVERT_TO_C_CHAR(tr("gray"))  //gray
-#define WHITE_COLOR        CONVERT_TO_C_CHAR(tr("white")) //white
+OSCDbUtil::OSCDbUtil()
+{
+    //create sqlite
+    db = QSqlDatabase::addDatabase(DB_DRIVER);
+    db.setDatabaseName(DB_NAME);
+    //open sqlite and create table
+    if (db.open()) {
+        qDebug() << "open success";
+        //create table
+        QSqlQuery query;
+         qDebug() << "exec" <<query.exec(DB_TABLE);
+         qDebug() << "insert " << query.exec(QObject::tr("insert into osc(loginname,password) values('sss','朱丛启')"));
+    }
+    else{
+        qDebug() << db.lastError().text();
+    }
+}
 
-#endif // CONSTSTRINGS_H
+/**
+ * the DbHelper handle
+ * Common handle
+ */
+OSCDbUtil *OSCDbUtil::getDbHelper()
+{
+    if (dbHelper == NULL) {
+        dbHelper = new OSCDbUtil();
+    }
+    return dbHelper;
+}
+
+/**
+ * close the db connection
+ */
+void OSCDbUtil::closeDb()
+{
+    db.close();
+}
