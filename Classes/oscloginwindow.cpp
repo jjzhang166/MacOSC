@@ -31,6 +31,11 @@ OSCLoginWindow::OSCLoginWindow(QWidget *parent) :
     ui(new Ui::OSCLoginWindow)
 {
     ui->setupUi(this);
+
+
+    //testing data
+    ui->loginname->setText("brucezcq@gmail.com");
+
 //  init login window
     initLoginWindow();
 // connect signals and slots
@@ -57,6 +62,16 @@ void OSCLoginWindow::createActions()
     //network signal and slot
     connect(manager,SIGNAL(finished(QNetworkReply*)),
             this,SLOT(onLoginRequestResult(QNetworkReply*)));
+    //return
+    connect(ui->loginname,SIGNAL(returnPressed()),
+            this,SLOT(onLoginMacOSCAction()));
+    connect(ui->password,SIGNAL(returnPressed()),
+            this,SLOT(onLoginMacOSCAction()));
+    //text changed
+    connect(ui->loginname,SIGNAL(textChanged(QString)),
+            this,SLOT(onClearText()));
+    connect(ui->password,SIGNAL(textChanged(QString)),
+            this,SLOT(onClearText()));
 }
 
 void OSCLoginWindow::initLoginWindow()
@@ -64,6 +79,9 @@ void OSCLoginWindow::initLoginWindow()
     //init tools
     xml = XmlParserUtil::getXmlParserUtil();
     db = OSCDbUtil::getDbHelper();
+
+    //login flag
+    loginSuccess = false;
 
     //init register button
     ui->registerButton->setText(REGISTER_TEXT);
@@ -81,8 +99,12 @@ void OSCLoginWindow::initLoginWindow()
     //init network manager
     manager = new QNetworkAccessManager(this);
 
-    //testing data
-    ui->loginname->setText("brucezcq@gmail.com");
+    //setting focus state
+    if (ui->loginname->text().length() == 0) {
+        ui->loginname->setFocus();
+    }else{
+        ui->password->setFocus();
+    }
 }
 
 void OSCLoginWindow::changeState(bool state)
@@ -91,6 +113,13 @@ void OSCLoginWindow::changeState(bool state)
     ui->password->setEnabled(state);
     ui->rememberPassword->setEnabled(state);
     ui->loginButton->setEnabled(state);
+}
+
+void OSCLoginWindow::onClearText()
+{
+    if (!loginSuccess && ui->prompt->text().length() != 0) {
+        ui->prompt->setText(CLEAR_TEXT);
+    }
 }
 
 void OSCLoginWindow::onAboutMacOSCAction()
@@ -130,8 +159,12 @@ void OSCLoginWindow::onLoginRequestResult(QNetworkReply* reply)
             ui->prompt->setText(RICH_TEXT(RED_COLOR,CONVERT_TO_C_CHAR(xml->getErrorMessage())));
             //reopen
             changeState();
+            //update focus
+            ui->loginname->setFocus();
             return;
         }
+        //login success and update the login flag
+        loginSuccess = true;
         QMovie *loadingMovie = new QMovie(":/login/loading");
         ui->prompt->setMovie(loadingMovie);
         loadingMovie->start();

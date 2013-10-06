@@ -55,6 +55,7 @@ private:
     QNetworkAccessManager *manager;
     XmlParserUtil *xml;
     OSCDbUtil *db;
+    bool loginSuccess;
     void createActions();
     void initLoginWindow();
     void changeState(bool state=true);
@@ -62,6 +63,7 @@ private slots:
     void onAboutMacOSCAction();
     void onLoginMacOSCAction();
     void onLoginRequestResult(QNetworkReply* reply);
+    void onClearText();
 };
 
 #endif // OSCLOGINWINDOW_H
