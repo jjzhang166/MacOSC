@@ -129,6 +129,10 @@ void OSCLoginWindow::onAboutMacOSCAction()
 
 void OSCLoginWindow::onLoginMacOSCAction()
 {
+//    OSCMainWindow *oscMainWin = new OSCMainWindow;
+//    this->close();
+//    oscMainWin->show();
+//    return;
     if (ui->loginname->text().length() == 0
             || ui->password->text().length() ==0){
         ui->prompt->setText(RICH_TEXT(RED_COLOR,EMPTY_TEXT));
@@ -169,18 +173,23 @@ void OSCLoginWindow::onLoginRequestResult(QNetworkReply* reply)
         ui->prompt->setMovie(loadingMovie);
         loadingMovie->start();
        OSCUser* user = xml->getOSCUser();
+
+       QWebView *web = new QWebView;
+       web->load(QUrl(user->getPortrait()));
+       web->show();
        manager->get(QNetworkRequest(QUrl("http://farm5.static.flickr.com/4101/4798839454_725882374d_b.jpg")));
     }else{
         qDebug() << "get avatar";
         QPixmap currentPicture;
         currentPicture.loadFromData(reply->readAll());
-//        QDateTime now;
-//        QString filename = now.currentDateTime().toString("yyMMddhhmmss.jpg");
-//        currentPicture->save(QString("/Users/BruceZCQ/Downloads/").append(filename));
+        QDateTime now;
+        QString filename = now.currentDateTime().toString("yyMMddhhmmss.jpg");
+        currentPicture.save(QString("/Users/BruceZCQ/Downloads/").append(filename));
         QLabel *ImageLabel = new QLabel();
 //        QMovie *move = new QMovie(filename);
 //        ImageLabel->setMovie(move);
 //        move->start();
+
         ImageLabel->setPixmap(currentPicture);
         ImageLabel->show();
     }

@@ -19,6 +19,9 @@ QT       += network
 QT       += xml
 # sql
 QT       += sql
+# web
+QT       += webkit
+QT       += webkitwidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
