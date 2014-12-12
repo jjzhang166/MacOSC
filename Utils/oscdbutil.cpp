@@ -38,7 +38,7 @@ OSCDbUtil::OSCDbUtil()
         //create table
         QSqlQuery query;
          qDebug() << "exec" <<query.exec(DB_TABLE);
-         qDebug() << "insert " << query.exec(QObject::tr("insert into osc(loginname,password) values('sss','朱丛启')"));
+         qDebug() << "insert " << query.exec(QObject::tr("insert into osc(loginname,password) values('sss','BruceZCQ')"));
     }
     else{
         qDebug() << db.lastError().text();

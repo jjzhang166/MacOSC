@@ -138,7 +138,7 @@ void OSCLoginWindow::onLoginMacOSCAction()
         ui->prompt->setText(RICH_TEXT(RED_COLOR,EMPTY_TEXT));
         return;
     }
-    QNetworkRequest request(OSC_HTTPS_LOGIN_URL);
+    QNetworkRequest request(OSC_HTTP_LOGIN_URL);
     request.setHeader(QNetworkRequest::ContentTypeHeader,"application/x-www-form-urlencoded");
     QString params = QString("username=")
                         .append(ui->loginname->text())
@@ -167,6 +167,7 @@ void OSCLoginWindow::onLoginRequestResult(QNetworkReply* reply)
             ui->loginname->setFocus();
             return;
         }
+        this->hide();
         //login success and update the login flag
         loginSuccess = true;
         QMovie *loadingMovie = new QMovie(":/login/loading");
